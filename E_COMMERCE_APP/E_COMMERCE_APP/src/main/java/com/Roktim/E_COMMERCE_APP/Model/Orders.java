@@ -64,7 +64,7 @@ public class Orders {
         this.orderDate = orderDate;
     }
 
-    public List<OrderItem> getOrderItems() {
+    public static List<OrderItem> getOrderItems() {
         return orderItems;
     }
 

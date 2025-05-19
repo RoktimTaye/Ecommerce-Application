@@ -12,10 +12,8 @@ import com.Roktim.E_COMMERCE_APP.dto.OrderItemDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderService {
@@ -58,5 +56,38 @@ public class OrderService {
 
        return new OrderDTO(SaveOrder.getId(),SaveOrder.getTotalAmount()
                ,SaveOrder.getStatus(),SaveOrder.getOrderDate(),orderItemDTOS);
+    }
+
+    public List<OrderDTO> getAllOrders() {
+      List<Orders> orders = orderRepository.findAllOrdersWithUsers();
+      return orders.stream().map(this::convertToDTO).collect(Collectors.toList());
+    }
+
+    private OrderDTO convertToDTO(Orders orders) {
+          List<OrderItemDTO> OrderItems = Orders.getOrderItems().stream()
+                    .map(item-> new OrderItemDTO(
+                            item.getProduct().getName(),
+                            item.getProduct().getPrice(),
+                            item.getQuantity())).collect(Collectors.toList());
+          return new OrderDTO(
+                  orders.getId(),
+                  orders.getTotalAmount(),
+                  orders.getStatus(),
+                  orders.getOrderDate(),
+                  orders.getUser()!=null ? orders.getUser().getName() : "unknown",
+                  orders.getUser()!=null ? orders.getUser().getEmail() : "unknown",
+                  OrderItems
+          );
+    }
+
+    public List<OrderDTO> getOrderByUser(Long userId) {
+        Optional<User> userOp = userRepository.findById(userId);
+
+        if (userOp.isEmpty()){
+            throw new RuntimeException("user not found");
+        }
+        User user = userOp.get();
+        List<Orders> ordersList = orderRepository.finByUser(user);
+        return ordersList.stream().map(this::convertToDTO).collect(Collectors.toList());
     }
 }
