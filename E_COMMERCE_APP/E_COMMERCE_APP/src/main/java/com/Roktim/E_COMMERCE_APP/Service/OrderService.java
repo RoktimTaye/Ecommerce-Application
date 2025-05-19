@@ -59,4 +59,8 @@ public class OrderService {
        return new OrderDTO(SaveOrder.getId(),SaveOrder.getTotalAmount()
                ,SaveOrder.getStatus(),SaveOrder.getOrderDate(),orderItemDTOS);
     }
+
+    public List<OrderDTO> getAllOrders() {
+        orderRepository.findAllOrderWithUsers();
+    }
 }
