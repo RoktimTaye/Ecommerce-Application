@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface OrderRepository extends JpaRepository<Orders,Long> {
 
-    @Query("Select * from Orders o Join FETCH o,user")
+    @Query("SELECT o from Orders o JOIN FETCH o.user")
     List<Orders> findAllOrdersWithUsers();
 
     List<Orders> finByUser(User user);
