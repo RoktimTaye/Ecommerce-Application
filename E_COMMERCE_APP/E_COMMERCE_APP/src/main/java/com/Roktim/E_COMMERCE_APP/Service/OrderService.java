@@ -68,9 +68,17 @@ public class OrderService {
                ,SaveOrder.getStatus(),SaveOrder.getOrderDate(),orderItemDTOS);
     }
 
+    //7.Har Order object ko OrderDTO me convert karo, aur sabhi converted objects ko ek List me wapas collect karke return karo.
     public List<OrderDTO> getAllOrders() {
-      List<Orders> orders = orderRepository.findAllOrdersWithUsers();
-      return orders.stream().map(this::convertToDTO).collect(Collectors.toList());
+      List<Orders> orders = orderRepository.findAllOrdersWithUsers(); //Har order ka detail OrderRepository se lake dega hume.
+        // Yaha pain Order ko OrderDTO main conveert kiya hain.
+      return orders.stream() //Yaha pe Orders ghus gaya internally.
+              .map(this::convertToDTO) //Yaha pe actual Data Transfer Object hua, matlab Orders se OrderDTO main convert hua.
+              .collect(Collectors.toList());
+        //a.list ko ek Stream banata hai (pipeline). Har Order object pe functional-style processing kar sakta hai.
+        //b.map() ka kaam hai: har element ko transform karna. ConvertToDTO(order) method ko har element pe apply karega.
+        //c.Har Order object ko ek OrderDTO object me convert karega.
+        //d.Stream ke converted elements ko phir se ek List me collect karta hai. Result: List<OrderDTO>.
     }
 
     private OrderDTO convertToDTO(Orders orders) {
