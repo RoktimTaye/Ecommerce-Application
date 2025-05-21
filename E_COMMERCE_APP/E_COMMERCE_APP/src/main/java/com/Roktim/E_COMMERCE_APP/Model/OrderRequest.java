@@ -8,7 +8,7 @@ public class OrderRequest {
 
     //key-product Id
     //value-quantity
-
+    //For now we will think that this Map is Taking the product Id and Quantity.Yaha man lete hain ki internally automatically userId or productId mapped ho gayi hain.
     private Map<Long,Integer> productQuantities;
 
     private double totalAmount;
