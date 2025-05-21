@@ -16,6 +16,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
+//3.YAHA PE ASLI ORDER PLACING KA SARA KAM HOGA.BAKI SERVICE CLASSES SE YE DATA LETA HAIN.
+//NOTE : DTO'S KA KAM YAHA SE SHURU HOTA HAIN JAB SABKUCH SET HO JATA HAIN TO YAHA DATA KO DTO' ME CONVERT KIYA JATA HAIN.
 public class OrderService {
 
     @Autowired

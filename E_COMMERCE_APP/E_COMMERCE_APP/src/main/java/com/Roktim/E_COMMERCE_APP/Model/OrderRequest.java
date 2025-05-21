@@ -1,6 +1,8 @@
 package com.Roktim.E_COMMERCE_APP.Model;
 
 import java.util.Map;
+//1.IS CLASS MAIN SABSE PAHLE FRONTEND SE REQUEST AYGA. YE CLASS BAKI MODEL DE DATA KO CONSUME KARTA HAIN.
+
 //We are using this DTO type class because too many mappings can create problem of recursions and unnecessary data will we shown without any reason.
 //This DTO will help to transfer objects from one class  to another without mapping resursion confliicts.
 //Without this we have to write jason references again and again for instructing data transfer , so DTO acts as a layer between mapped classes.

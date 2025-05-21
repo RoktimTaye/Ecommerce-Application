@@ -11,6 +11,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/orders")
 @CrossOrigin("*")
+//2.YE VO CLASS HAIN JISME OrderRequest SE SIGNAL AYEGA KI KAM KARNA HAIN - MATLAB ORDER PLACE KARNA HAIN.BAKI CONTROLLER CLASSES SE YEIN DATA LETA HAIN.
 public class OrderController {
 
     @Autowired
@@ -19,6 +20,7 @@ public class OrderController {
     @PostMapping("/place/{userId}")
     public OrderDTO placeOrder(@PathVariable Long userId, @RequestBody OrderRequest orderRequest){
         return orderService.placeOrder(userId,orderRequest.getProductQuantities(),orderRequest.getTotalAmount());
+        //Yaha se Service - yaniki OrderService class ko call ho raha hain. Response miln ke bad return hota hain.
     }
 
     @GetMapping("/all-orders")
