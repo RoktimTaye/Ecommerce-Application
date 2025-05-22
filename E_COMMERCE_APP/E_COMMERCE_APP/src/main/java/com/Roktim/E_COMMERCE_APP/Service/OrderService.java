@@ -36,6 +36,7 @@ public class OrderService {
                     .orElseThrow(()->new RuntimeException("user not found")); //Agar user na mile to.
 
         //2.User milne ke bad order placing ka process start hoga.Yaha loop nahi lagaya kyuki sirf ek user hain multiple Items ke liye.
+        //Ye ek simple collection hain java ka .No need to think too complicated.
          Orders order = new Orders(); //Batana padega ki data order table main cahiye.
          order.setUser(user); //Order miln ke kiye pahle user seet kar diya ki konsa user order karega.
          order.setOrderDate(new Date());
@@ -43,7 +44,7 @@ public class OrderService {
          order.setTotalAmount(totalAmount);
 
          //3.Order banane ke bad order ke andar items kya kya honge, unhain dalna hain.
-        List<OrderItem> orderItems = new ArrayList<>(); //Har ek item jo ek single order ke andar hoga, fir OrderItemDTO main dalenge.
+        List<OrderItem> orderItems = new ArrayList<>(); //Har ek item jo ek single order ke andar hoga, fir OrderItemDTO main dalenge.Niche ho OrderItem ka collection hain , us collection ka har order ka details loop me bar bar Is List me ghussega.
         List<OrderItemDTO> orderItemDTOS = new ArrayList<>(); //Har item ab OrderItemDTO Me ghusega one by one.
 
         //4.Ek ek karke product details ko lake dalna.
@@ -72,23 +73,25 @@ public class OrderService {
 
     //7.Har Order object ko OrderDTO me convert karo, aur sabhi converted objects ko ek List me wapas collect karke return karo.
     public List<OrderDTO> getAllOrders() {
+        //Yaha pe sirf bolagaya hain ki convert karna hain , conversion kisi or function me hoga.
       List<Orders> orders = orderRepository.findAllOrdersWithUsers(); //Har order ka detail OrderRepository se lake dega hume.
         // Yaha pain Order ko OrderDTO main conveert kiya hain.
       return orders.stream() //Yaha pe Orders ghus gaya internally.
               .map(this::convertToDTO) //Yaha pe actual Data Transfer Object hua, matlab Orders se OrderDTO main convert hua.
               .collect(Collectors.toList());
-        //a.list ko ek Stream banata hai (pipeline). Har Order object pe functional-style processing kar sakta hai.
+        //a.list ka ek Stream banata hai (pipeline). Har Order object pe functional-style processing kar sakta hai.
         //b.map() ka kaam hai: har element ko transform karna. ConvertToDTO(order) method ko har element pe apply karega.
         //c.Har Order object ko ek OrderDTO object me convert karega.
         //d.Stream ke converted elements ko phir se ek List me collect karta hai. Result: List<OrderDTO>.
     }
-
+       //8.Yaha pain csli conversion hoga. Upar to sirf bataya tha ki conveert karna hain.
     private OrderDTO convertToDTO(Orders orders) {
           List<OrderItemDTO> OrderItems = Orders.getOrderItems().stream()
                     .map(item-> new OrderItemDTO(
                             item.getProduct().getName(),
                             item.getProduct().getPrice(),
                             item.getQuantity())).collect(Collectors.toList());
+          //Ab yaha se return ho jaega Order me convert hune ke bad OrderDTO main.
           return new OrderDTO(
                   orders.getId(),
                   orders.getTotalAmount(),
@@ -100,6 +103,7 @@ public class OrderService {
           );
     }
 
+    //9.Yaha pain order milega UserId se.
     public List<OrderDTO> getOrderByUser(Long userId) {
         Optional<User> userOp = userRepository.findById(userId);
 
