@@ -11,8 +11,8 @@ import java.util.List;
 public class UserService {
 
     @Autowired
-    private static UserRepository userRepository;
-    public static User registerUser(User user) {
+    private UserRepository userRepository;
+    public User registerUser(User user) {
 
         try {
             User newUser = userRepository.save(user);

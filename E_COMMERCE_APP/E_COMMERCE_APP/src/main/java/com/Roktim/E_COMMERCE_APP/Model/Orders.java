@@ -22,7 +22,7 @@ public class Orders {
     private Date orderDate;
 
     @OneToMany(mappedBy = "order",cascade = CascadeType.ALL)
-    private static List<OrderItem> orderItems;
+    private List<OrderItem> orderItems;
 
     public Long getId() {
         return id;
@@ -64,7 +64,7 @@ public class Orders {
         this.orderDate = orderDate;
     }
 
-    public static List<OrderItem> getOrderItems() {
+    public List<OrderItem> getOrderItems() {
         return orderItems;
     }
 
