@@ -9,7 +9,7 @@ public class OrderDTO {
     private double totalAmount;
     private String status;
     private Date orderDate;
-    private String UserName;
+    private String userName;
     private String email;
     private List<OrderItemDTO> orderItems;
 
@@ -19,7 +19,7 @@ public class OrderDTO {
         this.totalAmount = totalAmount;
         this.status = status;
         this.orderDate = orderDate;
-        UserName = userName;
+        this.userName = userName;
         this.email = email;
         this.orderItems = orderItems;
     }
@@ -65,11 +65,11 @@ public class OrderDTO {
     }
 
     public String getUserName() {
-        return UserName;
+        return userName;
     }
 
     public void setUserName(String userName) {
-        UserName = userName;
+        this.userName = userName;
     }
 
     public String getEmail() {
