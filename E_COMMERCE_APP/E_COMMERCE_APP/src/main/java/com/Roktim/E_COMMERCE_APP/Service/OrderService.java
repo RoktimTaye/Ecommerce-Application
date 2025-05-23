@@ -110,7 +110,7 @@ public class OrderService {
             throw new RuntimeException("user not found");
         }
         User user = userOp.get();
-        List<Orders> ordersList = orderRepository.finByUser(user);
+        List<Orders> ordersList = orderRepository.findByUser(user);
         return ordersList.stream().map(this::convertToDTO).collect(Collectors.toList());
 
     }
