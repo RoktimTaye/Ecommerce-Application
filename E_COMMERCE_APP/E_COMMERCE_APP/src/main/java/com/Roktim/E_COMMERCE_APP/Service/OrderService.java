@@ -64,11 +64,11 @@ public class OrderService {
 
         //5.OrderItems set karke save kar deenge.
         order.setOrderItems(orderItems); //set kar diya OrderItems
-       Orders SaveOrder =  orderRepository.save(order); //Save kar diya OrderItems OrderRepository main Order ka use karke.
+       Orders savedOrder =  orderRepository.save(order); //Save kar diya OrderItems OrderRepository main Order ka use karke.
 
         //6.Jo jo order kiya hain sirf vo rturn karna hain user ko.
-       return new OrderDTO(SaveOrder.getId(),SaveOrder.getTotalAmount()
-               ,SaveOrder.getStatus(),SaveOrder.getOrderDate(),orderItemDTOS);
+       return new OrderDTO(savedOrder.getId(),savedOrder.getTotalAmount()
+               ,savedOrder.getStatus(),savedOrder.getOrderDate(),orderItemDTOS);
     }
 
     //7.Har Order object ko OrderDTO me convert karo, aur sabhi converted objects ko ek List me wapas collect karke return karo.
