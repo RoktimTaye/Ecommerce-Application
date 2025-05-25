@@ -53,6 +53,7 @@ public class OrderService {
                    .orElseThrow(()-> new RuntimeException("Product not found")); //Agar product DB main available nahi hain to.
 
             //5.Product milne ke bad OrderItem set hoga har ek item ke liye DB main milne ke bad.
+            //Yaha model ke Order item class se data liya ja raha hain.
            OrderItem orderItem = new OrderItem(); //OrderItem set karne ko bol diya.
            orderItem.setOrder(order); //order set kar diya.
            orderItem.setProduct(product); //Order kee andar ka product set kar diya.
