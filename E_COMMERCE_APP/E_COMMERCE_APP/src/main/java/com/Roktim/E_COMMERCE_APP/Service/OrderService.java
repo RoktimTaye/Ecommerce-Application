@@ -83,7 +83,7 @@ public class OrderService {
         //c.Har Order object ko ek OrderDTO object me convert karega.
         //d.Stream ke converted elements ko phir se ek List me collect karta hai. Result: List<OrderDTO>.
     }
-       //8.Yaha pain csli conversion hoga. Upar to sirf bataya tha ki conveert karna hain.
+       //8.Yaha pain asli conversion hoga. Upar to sirf bataya tha ki conveert karna hain.
     private OrderDTO convertToDTO(Orders orders) {
           List<OrderItemDTO> OrderItems = orders.getOrderItems().stream()
                     .map(item-> new OrderItemDTO(
