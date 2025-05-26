@@ -20,3 +20,9 @@ isse Frontend ko bhej deta hain.
 
 Controller ke is data koSpring Boot Auto-identidy karke JSON main convert karke Frontend main bhej deta hain , jiske bad
 Frontend is data ko render karke user ko shoe kar deta hain on the UI (User Interface).
+
+JPA use karte wakt jab mapping use karte hain tab joincolumn likhna ya na likhna apne choise hain , kyuki JPA
+automatically dusre class ka foreign key us class main dal deta hain jaha par joincolumn likha hoga .
+@JoinColumn(name = "order_id")
+private Orders order;
+Iska matlab hain ki Order class ka key foreign key ke form main ayega.
